@@ -33,6 +33,15 @@ Out of scope by design: digital game simulation, rankings, AI grading, learning-
 
 ---
 
+## Orientation for new teachers
+
+- **Sample walkthrough (about two minutes, five stops):** Today → class picture → answer and reason → teaching activity → setup preview, then a finish card. Start it from **Take a quick walkthrough** on the landing page, the one-time welcome, or **How it works** in the account menu (also how to replay it). It runs in the fictional sample class, reuses an existing sample, and never submits forms or changes records. The finish leaves the sample and returns you to your account.
+- **Welcome:** shown once to a teacher with no classes.
+- **First-session checklist** on Today: create a class → set up a session → collect some thinking. Progress comes only from the teacher's own saved records.
+- **Contextual help:** short “What does this mean?” notes on the key screens, opened automatically once per teacher.
+
+Copy lives in `content/orientation-copy.json`. Logic is in `src/lib/orientation/` and `src/components/orientation/`. Only the tour's status and step and the dismissed-help flags are stored in the browser.
+
 ## Run it locally (no credentials needed)
 
 Requires **Node.js 22.13+** (uses the built-in `node:sqlite`; developed on Node 26).

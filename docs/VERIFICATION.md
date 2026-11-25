@@ -121,6 +121,39 @@ Deployed `0947af8` to https://classroom-compass-eight.vercel.app. As an outside 
 
 Known: dates are formatted on the server in UTC, so evening Pacific activity shows the next day's date.
 
+## Teacher orientation (2026-11-25)
+
+Automated: 53/53 tests (including routing, the destination allowlist, checklist derivation, activity-state wording, and sample resolution with a changed sample). The production build passes, and the bundle scan found no key markers in 28 client files.
+
+Browser, local (Supabase mode):
+
+- **New teacher (Teacher B):**
+  - The welcome opens with focus inside and closes with Escape. It isn't shown again after reload.
+  - The checklist reads 0 of 3 before and after the sample walkthrough, so the sample never counts.
+- **All five stops** find their targets:
+  - The class picture shows the real counts (“21 of 24”).
+  - The activity stop uses the “planned” wording.
+- **Navigation:**
+  - Refresh resumes without reseeding.
+  - Browser Back and Forward move between stops.
+  - Nav elsewhere pauses the tour, and Resume returns to the same stop.
+  - Escape pauses, and Exit tour closes it.
+  - Replay reuses the same sample (same workspace ID).
+- **Finish:** each kind of visitor lands in the right place.
+  - B: “Set up my class” → `/classes/new`, still signed in as B.
+  - Anonymous: “Create a teacher account” → `/?signup=1` with the Create account tab selected.
+  - Teacher A, with classes: no welcome or checklist; “Return to my classes” → their own class.
+- **Fallbacks:** with the sample class deleted, the missing target shows an explanation. Next shows “This sample has changed”, and “Start a fresh sample walkthrough” starts a new sample at stop 1.
+- **No side effects:** after touring, the sample plan was still Planned and its check still closed.
+- **Layout and print:** at 390 px there's a bottom sheet with no horizontal overflow, and the target scrolls above it. Tour UI and help are hidden in print.
+- **Learner pages and storage:**
+  - `/check` contains no orientation or keys.
+  - localStorage holds only version, status, step, and a welcome flag, keyed per teacher by hash.
+
+Live (Vercel): the full five-stop walkthrough as Teacher A, ending with “Return to my classes” → their Supabase class.
+
+Not verified: screen-reader announcements with VoiceOver or NVDA (an aria-live region is present); a tour across two browser tabs at once.
+
 ## Not verified
 
 - Supabase email confirmation and password reset emails. The test project has “Confirm email” off.
