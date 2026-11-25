@@ -12,7 +12,7 @@
     "check:bundle": "node scripts/check-client-bundle.mjs"
   },
   "engines": {
-    "node": ">=22.13"
+    "node": "24.x"
   },
   "dependencies": {
     "@supabase/ssr": "0.12.7",
