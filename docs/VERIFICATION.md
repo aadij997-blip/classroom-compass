@@ -109,6 +109,18 @@ The migrations were applied with `supabase/setup-all.sql` in the SQL Editor (Dat
 
 Test accounts `teacher-a@example.test` and `teacher-b@example.test` exist in the staging project (password in the gitignored `.data/test-accounts.txt`). Delete them under **Authentication → Users** when no longer needed.
 
+## Live deployment (Vercel, 2026-11-25)
+
+Deployed `0947af8` to https://classroom-compass-eight.vercel.app. As an outside visitor, with no Vercel login:
+
+- **Basics:** the landing page returns 200 in Supabase mode. Logo and fonts load. `/today` redirects to sign-in.
+- **Security headers:** `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`, HSTS.
+- **Card links:** Learner 01's real card link opens a session ("Hi, Learner 01! … nothing to answer right now"), and a fake card shows "That link isn't working".
+- **Sample class:** loads with "9 of 21…" (node:sqlite works on Vercel's Node 24). Teach, thinking, and collect pages return 200.
+- **Teacher A:** signed in on the live site and saw the same Supabase class and Teach numbers as local testing.
+
+Known: dates are formatted on the server in UTC, so evening Pacific activity shows the next day's date.
+
 ## Not verified
 
 - Supabase email confirmation and password reset emails. The test project has “Confirm email” off.

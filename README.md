@@ -2,6 +2,8 @@
 
 **See what your students are learning — and know what to teach next.**
 
+**Live:** https://classroom-compass-eight.vercel.app (Vercel, connected to a Supabase staging project). Try **Explore a sample class**, which is fictional and safe to click around.
+
 A teacher companion for MoneyMind Games' physical InvestQuest card game (grades 4–6). It connects one short loop:
 
 > Choose a goal → play → two-question reflection check → see the thinking → teach → check again.
@@ -82,6 +84,15 @@ With Supabase configured, teacher sign-up and sign-in use Supabase Auth, and all
 The Supabase backend was verified against a live staging project on 2026-11-24, including direct row-level-security attack tests. See `docs/VERIFICATION.md`.
 
 ---
+
+## Deploying on Vercel
+
+1. Import the GitHub repo in Vercel (framework: Next.js, root `./`). Node is pinned to 24.x in `package.json`.
+2. Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` under **Environment Variables** *before* the first build. Next.js inlines them at build time; if they are missing, the server falls back to local mode, which can't write files on Vercel.
+3. Don't add Vercel's “Supabase” integration. It creates a separate database.
+4. In Supabase → **Authentication → URL Configuration**, set **Site URL** to the Vercel URL so confirmation and reset emails link back correctly.
+
+On serverless, the **sample class** lives in each server instance's memory. It reseeds itself if a request lands on a fresh instance, so sample-class edits can occasionally reset. Real classes are always in Supabase.
 
 ## Architecture
 
