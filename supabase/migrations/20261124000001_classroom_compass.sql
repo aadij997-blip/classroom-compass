@@ -7,7 +7,7 @@
 -- Answer keys and interpretation mappings are NOT stored in the database; they
 -- live in server-only application code.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 -- ------------------------------------------------------------------ tables
 create table public.classes (
@@ -335,6 +335,15 @@ create policy actions_owner on public.teaching_actions for all to authenticated
 create policy content_items_read on public.content_items for select to authenticated using (true);
 -- learner_sessions and submission_receipts: no policies → no direct access.
 
+-- Explicit table privileges (works whether or not the project auto-grants new
+-- tables to the Data API). RLS policies above still decide which rows are visible.
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on public.classes, public.groups, public.group_members,
+  public.sessions, public.check_runs, public.observations, public.teacher_reviews,
+  public.teaching_actions to authenticated;
+grant select, insert, update, delete on public.responses to authenticated;
+grant select on public.response_revisions, public.content_items to authenticated;
+
 -- Teachers can see whether a learner has access, but never the token hash.
 revoke all on public.learners from anon, authenticated;
 grant select (id, class_id, alias, position, has_access, created_at) on public.learners to authenticated;
@@ -356,11 +365,11 @@ declare
   e timestamptz := now() + interval '3 hours';
 begin
   if p_token is null or char_length(p_token) > 80 then return; end if;
-  select id into l_id from learners where token_hash = encode(digest(p_token, 'sha256'), 'hex');
+  select id into l_id from learners where token_hash = encode(extensions.digest(p_token, 'sha256'), 'hex');
   if l_id is null then return; end if;
   delete from learner_sessions where learner_sessions.expires_at < now();
-  s := 'ls_' || translate(encode(gen_random_bytes(24), 'base64'), '+/=', '-_');
-  insert into learner_sessions (token_hash, learner_id, expires_at) values (encode(digest(s, 'sha256'), 'hex'), l_id, e);
+  s := 'ls_' || translate(encode(extensions.gen_random_bytes(24), 'base64'), '+/=', '-_');
+  insert into learner_sessions (token_hash, learner_id, expires_at) values (encode(extensions.digest(s, 'sha256'), 'hex'), l_id, e);
   return query select s, e;
 end $$;
 
@@ -368,7 +377,7 @@ create or replace function public.learner_from_session(p_session text)
 returns public.learners
 language sql stable security definer set search_path = public as $$
   select l.* from learner_sessions s join learners l on l.id = s.learner_id
-  where s.token_hash = encode(digest(p_session, 'sha256'), 'hex') and s.expires_at > now() and l.token_hash is not null;
+  where s.token_hash = encode(extensions.digest(p_session, 'sha256'), 'hex') and s.expires_at > now() and l.token_hash is not null;
 $$;
 revoke all on function public.learner_from_session(text) from public, anon, authenticated;
 

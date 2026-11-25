@@ -65,7 +65,8 @@ Local mode is for evaluation only. **It is not set up for classroom collection a
 ## Configured classroom mode (Supabase)
 
 1. Create a Supabase project. In **Authentication → Providers**, enable Email.
-2. Apply the migrations in order (SQL editor, or `supabase db push` with the Supabase CLI):
+   Under **Data API** settings, keep the Data API enabled. “Grant API access to new tables automatically” can stay **off**: the migration grants exactly what the app needs. Turning on “Enable RLS on new tables automatically” is a good safety net.
+2. Apply the migrations in order. Easiest: paste `supabase/setup-all.sql` (both files combined) into **SQL Editor** and run it once. Or use `supabase db push` with the Supabase CLI:
    - `supabase/migrations/20261124000001_classroom_compass.sql` — tables, constraints, triggers, row-level security, learner RPCs
    - `supabase/migrations/20261124000002_content_items.sql` — option IDs per item version (no keys)
 3. Copy `.env.example` to `.env.local` and set:
@@ -73,12 +74,12 @@ Local mode is for evaluation only. **It is not set up for classroom collection a
    NEXT_PUBLIC_SUPABASE_URL=https://<project>.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key>
    ```
-   **No service-role key is used.** Don't add one.
+   The anon key can be the newer **publishable** key (`sb_publishable_…`). **No secret or service-role key is used.** Don't add one.
 4. Use `npm run build && npm start`, served over HTTPS (secure cookies are on in production).
 
 With Supabase configured, teacher sign-up and sign-in use Supabase Auth, and all teacher data goes through RLS. The sample class still runs in memory and is never mixed with real data.
 
-> ⚠️ The Supabase backend (`src/lib/store/supabase.ts` and the migrations) was written to the same interface as the SQLite backend, but **was not run against a live Supabase project during the build** (no credentials were available). See `docs/VERIFICATION.md`. Exercise it on a staging project before any classroom use.
+The Supabase backend was verified against a live staging project on 2026-11-24, including direct row-level-security attack tests. See `docs/VERIFICATION.md`.
 
 ---
 

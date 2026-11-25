@@ -1,6 +1,6 @@
 # Verification record
 
-Build date: 2026-11-24. Environment: macOS, Node 26.3.1, Next.js 16.4.6, local mode (no Supabase credentials available). Nothing was deployed and no real student data was used.
+Build date: 2026-11-24. Environment: macOS, Node 26.3.1, Next.js 16.4.6; local mode first, then a Supabase staging project. Nothing was deployed and no real student data was used.
 
 ## Automated checks
 
@@ -72,20 +72,52 @@ Server logs: no errors. Browser console: only the two expected 404s from step 17
 - **Grid.** It now uses each learner's most recent *answered* check, so a new follow-up with few responses doesn't hide earlier evidence.
 - Minor: plural agreement (“1 … suggests”), local date default for observations, “next in sequence” label, scroll-to-top between learner questions, illustration label overflow.
 
-## Not verified (needs a configured environment)
+## Supabase verification (staging project, 2026-11-24)
 
-- **Supabase backend and migrations** (`src/lib/store/supabase.ts`, `supabase/migrations/*`). Not executed: no Supabase project or credentials, and no Docker or Postgres on the build machine. That includes:
-  - RLS policies and column grants
-  - Triggers (same-class, response validation, revision history, token-change session cleanup)
-  - The `learner_*` SECURITY DEFINER RPCs
-  - Supabase Auth sign-up and sign-in, and email confirmation
-  - Cross-device collection over the network
+The migrations were applied with `supabase/setup-all.sql` in the SQL Editor (Data API on, auto-grant off, auto-RLS on). Two issues found and fixed first:
 
-  Recommended before any classroom use: apply the migrations to a staging project, then re-run the browser steps above plus a two-account RLS test using the anon key directly.
-- **Real printer or PDF output**, and screen-reader passes (VoiceOver/NVDA). Structure was checked: semantic landmarks, labelled controls, table captions and scope, icon + text for states, and visible focus. A manual assistive-technology pass hasn't been done.
-- **Rate limits under real classroom load.** The limiter is in-process, so it won't share state across multiple serverless instances.
-- **The ~2-minute setup target and ~90-second interpretation target** are design hypotheses for the teacher pilot. They weren't measured.
+- On Supabase, `pgcrypto` lives in the `extensions` schema, so calls are now qualified as `extensions.digest` / `extensions.gen_random_bytes`.
+- Projects with auto-grant off need explicit table grants, so the migration now grants exactly what the app needs.
+
+**Anonymous (public key only):** every app table is blocked (`42501`); a fake card token gets no session; a fake session gets no context and submissions are rejected; `owns_class` is not callable.
+
+**Through the app (browser):**
+- Teacher A signs up with Supabase Auth and sees the first-use page, then creates a 6-learner class with 6 cards.
+- Starting a liquidity session creates the check run. Opening the check works.
+- Learners 01–03 answered through private links. Learner 01 shows expected reasoning, Learner 02 the target pattern, and Learner 03 answered Q1 only.
+- Teacher paper entry for Learner 05 (`B C - -`) saved through row-level security.
+- Closing the check shows the Teach page computed from Supabase data: 3 of 6 complete (1 reasoning shown, 1 worth another look, 1 mixed), 2 started, “2 of 3 completed checks suggest students may be treating invested money as immediately available”, 4 device + 1 paper.
+- Selected-learners audience pre-filled with exactly Learners 02 and 04 → **Use this plan** → **Mark taught** → **Check again with fresh questions** creates a recheck run.
+- Turning off Learner 06's card works.
+
+**Learner functions, called directly:**
+- A first submission saves 2; a retry with the same ID returns `duplicate: true`; the same content under a new ID saves 0.
+- An invalid option is rejected (`unknown answer`), and an unknown check is rejected (`not available`).
+- Changing an answer saves 1 and writes a revision.
+- The learner context contains only that learner's alias, with no keys, mappings, or peers.
+- After closing, the learner sees 0 open checks, and a submission is rejected (`check closed`).
+- The revoked card gets no session.
+
+**Teacher B attacking Teacher A's data directly with B's own JWT (bypassing the app):**
+- Reads of classes, learners, sessions, check runs, responses, revisions, teaching actions, and observations all return **0 rows**.
+- Reading `token_hash` is blocked. Adding a learner or a session to A's class is blocked.
+- Reopening A's check, deleting A's class, and reassigning A's class to B each changed **0 rows**.
+- Forging a device response is blocked by the trigger, and `owns_class(A)` returns false.
+- In the app, B gets 404 on A's class and evidence pages and sees an empty class list.
+
+**Teacher A, directly:** reads their own class, responses (9), revisions (1), and teaching actions (1). `token_hash` is blocked even for the owner. Deleting a throwaway class cascaded learners, sessions, and observations to 0.
+
+Test accounts `teacher-a@example.test` and `teacher-b@example.test` exist in the staging project (password in the gitignored `.data/test-accounts.txt`). Delete them under **Authentication → Users** when no longer needed.
+
+## Not verified
+
+- Supabase email confirmation and password reset emails. The test project has “Confirm email” off.
+- Two different physical devices on a network. Learners were driven from the same machine with separate learner sessions.
+- Real printer or PDF output, and screen-reader passes (VoiceOver/NVDA). Structure was checked: semantic landmarks, labelled controls, table captions and scope, icon + text for states, and visible focus.
+- Rate limits under real classroom load. The limiter is in-process, so it won't share state across multiple serverless instances.
+- The ~2-minute setup target and ~90-second interpretation target are design hypotheses for the teacher pilot. They weren't measured.
+- Public deployment (not performed).
 
 ## Acceptance checklist mapping
 
-See `05-ACCEPTANCE-CHECKLIST.txt` in the handoff. Every item in Product/Visual, Functional loop, Content/Analytics, and Usability was exercised above or in tests, except where listed under “Not verified”. Access/Data items are verified for the SQLite backend and implemented but unverified for Supabase.
+See `05-ACCEPTANCE-CHECKLIST.txt` in the handoff. Every item in Product/Visual, Functional loop, Content/Analytics, and Usability was exercised above or in tests, except where listed under “Not verified”. Access/Data items are verified for both the SQLite and Supabase backends.
