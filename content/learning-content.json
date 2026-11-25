@@ -1,0 +1,982 @@
+{
+  "content_version": "pilot-1.1",
+  "status": "Original draft classroom material; educator review required before use with real students. Not a validated instrument.",
+  "grade_band": "4–6",
+  "delivery_rules": [
+    "Treat the teacher_only block as server/teacher content. Never serialize it into student payloads or import the full source into student bundles.",
+    "Display order may be shuffled using stable option IDs. Stable IDs preserve scoring across phases.",
+    "Identical anchor versions may be compared within matched learners. Fresh recheck items are distinct tasks.",
+    "Confidence is optional and is not scored.",
+    "Optional explanations require teacher review; absent review is pending, not zero."
+  ],
+  "modules": [
+    {
+      "id": "opportunity-cost",
+      "title": "Choices and what we give up",
+      "curriculum_day": 1,
+      "goal": "Identify the next-best alternative given up when making a choice.",
+      "success_criterion": "I can name the next-best option and explain why it is the opportunity cost.",
+      "illustration_direction": "Two rounded choice cards connected by a forked path; no correct lifestyle preference implied.",
+      "anchor_item_ids": [
+        "oc-anchor-01",
+        "oc-anchor-02"
+      ],
+      "recheck_item_ids": [
+        "oc-recheck-01",
+        "oc-recheck-02"
+      ],
+      "activity": {
+        "id": "activity-next-best",
+        "title": "The next-best choice",
+        "minutes": 6,
+        "materials": [
+          "Three activity cards per pair",
+          "A choice arrow or movable token"
+        ],
+        "steps": [
+          {
+            "minutes": 1,
+            "teacher_says": "Here are library club, football, and a film. For this fictional character the order is library first, football second, film third. Only one can happen.",
+            "action": "Lay out the three cards in the stated order."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "The character chooses library club. Which option is next best? What did they give up?",
+            "action": "Move the token to the chosen card and point to the next-best card."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "A new character prefers film, then library, then football. Does the opportunity cost stay the same? Why?",
+            "action": "Reorder the same cards. Learners explain the changed next-best alternative."
+          },
+          {
+            "minutes": 1,
+            "teacher_says": "Complete this sentence: I chose ___. My next-best option was ___, so my opportunity cost was ___.",
+            "action": "Ask pairs to explain rather than vote on a best activity."
+          }
+        ],
+        "expected_reasoning": "Opportunity cost depends on the specified next-best alternative, not the price or a moral judgment about the preference.",
+        "scaffold": "Use only two cards and a “choose / give up” mat before adding a third.",
+        "extension": "Give a time constraint rather than a money constraint; ask which extra information is needed if preferences are unknown.",
+        "printable_student_material": {
+          "title": "Choose one; name the next-best option",
+          "cards": [
+            "Library club",
+            "Football",
+            "Film"
+          ],
+          "worksheet_prompts": [
+            "For the fictional character, rank the options.",
+            "The chosen option is ___.",
+            "The next-best alternative is ___.",
+            "The opportunity cost is ___ because ___."
+          ]
+        }
+      }
+    },
+    {
+      "id": "diversification",
+      "title": "Different baskets, different exposures",
+      "curriculum_day": 3,
+      "goal": "Explain why spreading exposure can reduce some concentration risks without guaranteeing profit.",
+      "success_criterion": "I can identify a shared exposure and explain what diversification can and cannot do.",
+      "illustration_direction": "Equal stacks of tokens in one restaurant basket versus several differently labeled sector baskets.",
+      "anchor_item_ids": [
+        "div-anchor-01",
+        "div-anchor-02"
+      ],
+      "recheck_item_ids": [
+        "div-recheck-01",
+        "div-recheck-02"
+      ],
+      "activity": {
+        "id": "activity-different-baskets",
+        "title": "What is in your baskets?",
+        "minutes": 7,
+        "materials": [
+          "Eight tokens per pair",
+          "Restaurant, technology, transport, and health sector cards",
+          "Two portfolio mats"
+        ],
+        "steps": [
+          {
+            "minutes": 2,
+            "teacher_says": "Both portfolios start with eight tokens. Put all eight of A in restaurants. Split B equally among four sectors.",
+            "action": "Build equally valued portfolios with different exposures."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "A made-up event directly affects restaurants. Which tokens are exposed to this specific event?",
+            "action": "Mark the restaurant tokens; do not award invented returns or present the result as a real-market prediction."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "Now imagine an event affecting all sectors. Does spreading the tokens guarantee no loss?",
+            "action": "Discuss what protection was limited to the first event."
+          },
+          {
+            "minutes": 1,
+            "teacher_says": "Explain why four restaurant stocks can still share one kind of risk.",
+            "action": "Invite a comparison that refers to exposure, not merely card count."
+          }
+        ],
+        "expected_reasoning": "Different sectors can have different exposures. Diversification can reduce a particular concentration, while losses remain possible.",
+        "scaffold": "Use two sectors, clear labels, and the same number of tokens in both portfolios.",
+        "extension": "Ask why two companies from apparently different sectors might still share a supplier or other risk.",
+        "printable_student_material": {
+          "title": "Compare exposure",
+          "cards": [
+            "Restaurants",
+            "Technology",
+            "Transport",
+            "Health"
+          ],
+          "worksheet_prompts": [
+            "Portfolio A: put eight tokens in restaurants.",
+            "Portfolio B: put two tokens in each sector.",
+            "Which portfolio has more direct exposure to a restaurant-only event? Why?",
+            "Why could both portfolios still lose value?"
+          ]
+        }
+      }
+    },
+    {
+      "id": "liquidity",
+      "title": "Cash today, assets later",
+      "curriculum_day": 5,
+      "goal": "Distinguish total asset value from cash available for an immediate payment.",
+      "success_criterion": "I can compare available cash with a payment due before assets can be sold.",
+      "illustration_direction": "Two friendly trays labeled “Available today” and “Available later”, with banknotes and investment cards.",
+      "anchor_item_ids": [
+        "liq-anchor-01",
+        "liq-anchor-02"
+      ],
+      "recheck_item_ids": [
+        "liq-recheck-01",
+        "liq-recheck-02"
+      ],
+      "activity": {
+        "id": "activity-cash-today",
+        "title": "Cash today, assets later",
+        "minutes": 6,
+        "materials": [
+          "Token slips labeled $100",
+          "Two trays/mats: Available today and Available later",
+          "Maya and Leo scenario cards"
+        ],
+        "steps": [
+          {
+            "minutes": 1,
+            "teacher_says": "Maya has $200 cash and $700 in stocks. Leo has $400 cash and $500 in stocks. What is the same about their total value?",
+            "action": "Build both $900 positions with tokens on the two mats."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "A $300 payment is due today, before either can sell stocks. Which tokens can move to the payment area now?",
+            "action": "Use only tokens in Available today. Ask learners to explain the constraint."
+          },
+          {
+            "minutes": 2,
+            "teacher_says": "Does owning something valuable always mean you can spend that value immediately? What information would change the answer?",
+            "action": "Discuss timing of sale and payment without claiming cash is always best."
+          },
+          {
+            "minutes": 1,
+            "teacher_says": "A club owns equipment but has little cash. What would you check before saying it can pay a bill today?",
+            "action": "Connect the reasoning to a new fictional context, then offer the fresh check."
+          }
+        ],
+        "expected_reasoning": "Payment capacity depends on cash available at the deadline. Equal total assets can have different liquidity.",
+        "scaffold": "Provide pre-counted tokens and compare only the cash with the bill before discussing total assets.",
+        "extension": "Change the sale date or bill deadline and ask how this changes the conclusion; keep all sale values explicit.",
+        "printable_student_material": {
+          "title": "What can be used today?",
+          "mat_labels": [
+            "Available today",
+            "Available later",
+            "Payment due today: $300"
+          ],
+          "scenario_cards": [
+            "Maya: $200 cash + $700 stocks",
+            "Leo: $400 cash + $500 stocks",
+            "No stocks can be sold before payment."
+          ],
+          "worksheet_prompts": [
+            "Both people own assets totaling ___.",
+            "Maya can use ___ today. Leo can use ___ today.",
+            "Who can pay now? Explain using the deadline.",
+            "What new information could change the answer?"
+          ]
+        }
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": "oc-anchor-01",
+      "version": 1,
+      "concept_id": "opportunity-cost",
+      "phase_role": "anchor",
+      "context": "game-related simplified decision",
+      "scenario": "Sam can buy one stock now or keep the same money for a later purchase. Keeping the money is Sam’s next-best option. Sam chooses to buy the stock.",
+      "question": "What is Sam’s opportunity cost?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Keeping the money for the later purchase."
+        },
+        {
+          "id": "b",
+          "text": "Only the number of dollars paid for the stock."
+        },
+        {
+          "id": "c",
+          "text": "Every purchase Sam might ever make."
+        },
+        {
+          "id": "d",
+          "text": "Any money the stock may earn."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "It is the next-best option Sam gives up by choosing the stock."
+        },
+        {
+          "id": "r2",
+          "text": "Opportunity cost always means the price paid."
+        },
+        {
+          "id": "r3",
+          "text": "Opportunity cost is every possible unchosen option added together."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "opportunity-cost-is-price",
+          "r3": "opportunity-cost-is-all-alternatives",
+          "r4": "uncertain"
+        },
+        "rationale": "The next-best alternative is explicitly keeping the money. Price is a monetary cost, but the concept asks which alternative is forgone."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "oc-anchor-02",
+      "version": 1,
+      "concept_id": "opportunity-cost",
+      "phase_role": "anchor",
+      "context": "transfer",
+      "scenario": "Ava can attend only one activity. Her first choice is library club, her second is football, and her third is watching a film. She chooses library club.",
+      "question": "What is the opportunity cost of Ava’s choice?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Attending football."
+        },
+        {
+          "id": "b",
+          "text": "Watching a film."
+        },
+        {
+          "id": "c",
+          "text": "Library club."
+        },
+        {
+          "id": "d",
+          "text": "Both football and the film together."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "Football is Ava’s next-best alternative, which she gives up."
+        },
+        {
+          "id": "r2",
+          "text": "Opportunity cost is always the least preferred option."
+        },
+        {
+          "id": "r3",
+          "text": "The option chosen is also the opportunity cost."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "opportunity-cost-is-least-preferred",
+          "r3": "opportunity-cost-is-chosen-option",
+          "r4": "uncertain"
+        },
+        "rationale": "The stated preference order identifies football as the next-best alternative. The film is another forgone option, but not the next-best one."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "oc-recheck-01",
+      "version": 1,
+      "concept_id": "opportunity-cost",
+      "phase_role": "recheck",
+      "context": "game-related simplified decision",
+      "scenario": "In a simplified game choice, Noor can hold a stock or sell it now and use the money to buy another available stock. Selling and making that purchase is Noor’s next-best alternative. Noor holds.",
+      "question": "Which opportunity does Noor give up?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Selling now and using the money for the other stock."
+        },
+        {
+          "id": "b",
+          "text": "The stock Noor continues to hold."
+        },
+        {
+          "id": "c",
+          "text": "Every future investment."
+        },
+        {
+          "id": "d",
+          "text": "Only the price Noor originally paid."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "The opportunity cost is the stated next-best alternative to holding."
+        },
+        {
+          "id": "r2",
+          "text": "The opportunity cost is the option Noor selected."
+        },
+        {
+          "id": "r3",
+          "text": "Opportunity cost must include every imaginable future option."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "opportunity-cost-is-chosen-option",
+          "r3": "opportunity-cost-is-all-alternatives",
+          "r4": "uncertain"
+        },
+        "rationale": "The alternative forgone is explicitly specified. There is no claim that holding or selling will produce a better return."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "oc-recheck-02",
+      "version": 2,
+      "concept_id": "opportunity-cost",
+      "phase_role": "recheck",
+      "context": "transfer",
+      "scenario": "A class has $20 and can buy either a book set or an art kit, each costing $20. The class prefers the book set, and the art kit is its next-best option. The class buys the books.",
+      "question": "What is the opportunity cost?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "The art kit."
+        },
+        {
+          "id": "b",
+          "text": "The book set."
+        },
+        {
+          "id": "c",
+          "text": "The books and art kit together."
+        },
+        {
+          "id": "d",
+          "text": "Any profit from the books."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "The art kit is the next-best alternative given up."
+        },
+        {
+          "id": "r2",
+          "text": "Opportunity cost is what the class bought."
+        },
+        {
+          "id": "r3",
+          "text": "Every option is an opportunity cost even if it was chosen."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "opportunity-cost-is-chosen-option",
+          "r3": "opportunity-cost-is-all-alternatives",
+          "r4": "uncertain"
+        },
+        "rationale": "The preference and resource constraint make the forgone next-best option clear."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "div-anchor-01",
+      "version": 1,
+      "concept_id": "diversification",
+      "phase_role": "anchor",
+      "context": "game-related simplified portfolio",
+      "scenario": "Two portfolios have the same total value. Portfolio A holds only restaurant companies. Portfolio B holds companies in several different sectors. An event directly harms restaurant companies. Nothing else about returns is given.",
+      "question": "Which portfolio has more of its value directly exposed to this restaurant event?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Portfolio A."
+        },
+        {
+          "id": "b",
+          "text": "Portfolio B."
+        },
+        {
+          "id": "c",
+          "text": "Neither can ever lose money."
+        },
+        {
+          "id": "d",
+          "text": "They must have exactly the same exposure."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "All of A is in the affected sector; B spreads some exposure across other sectors."
+        },
+        {
+          "id": "r2",
+          "text": "Any portfolio with several stock cards cannot lose money."
+        },
+        {
+          "id": "r3",
+          "text": "All sectors are always affected in exactly the same way."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "diversification-guarantees-no-loss",
+          "r3": "ignores-shared-sector-exposure",
+          "r4": "uncertain"
+        },
+        "rationale": "A has more direct sector concentration. This does not predict exact returns or guarantee that B will profit."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "div-anchor-02",
+      "version": 1,
+      "concept_id": "diversification",
+      "phase_role": "anchor",
+      "context": "transfer",
+      "scenario": "One fictional class business puts its whole budget into lemonade. Another splits an equal budget across lemonade, bookmarks, and crafts. The lemon supplier cannot deliver. Other supplies are unaffected.",
+      "question": "Which business has more of its budget directly exposed to the missing lemons?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "The lemonade-only business."
+        },
+        {
+          "id": "b",
+          "text": "The business split across three products."
+        },
+        {
+          "id": "c",
+          "text": "Neither business could lose anything."
+        },
+        {
+          "id": "d",
+          "text": "Both must lose all their money."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "The lemonade-only business concentrates its budget in the affected product."
+        },
+        {
+          "id": "r2",
+          "text": "Splitting a budget guarantees no losses."
+        },
+        {
+          "id": "r3",
+          "text": "If one part has a problem, every other part must have the identical problem."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "diversification-guarantees-no-loss",
+          "r3": "ignores-distinct-exposures",
+          "r4": "uncertain"
+        },
+        "rationale": "The event explicitly affects the lemon supply alone. Spreading exposure can limit this direct concentration without eliminating all business risk."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "div-recheck-01",
+      "version": 1,
+      "concept_id": "diversification",
+      "phase_role": "recheck",
+      "context": "game-related simplified portfolio",
+      "scenario": "Mina has four stocks, all in restaurant companies. Jay has four stocks spread across four different sectors. Values are equal. A disruption specifically affects restaurant companies.",
+      "question": "Whose portfolio is more directly concentrated in the affected sector?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Mina’s."
+        },
+        {
+          "id": "b",
+          "text": "Jay’s."
+        },
+        {
+          "id": "c",
+          "text": "Neither, because four cards always means diversification."
+        },
+        {
+          "id": "d",
+          "text": "Both are guaranteed to make money."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "Different exposures matter; Mina’s four stocks share restaurant-sector risk."
+        },
+        {
+          "id": "r2",
+          "text": "The number of cards alone determines diversification."
+        },
+        {
+          "id": "r3",
+          "text": "Owning several stocks guarantees profit."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "card-count-equals-diversification",
+          "r3": "diversification-guarantees-profit",
+          "r4": "uncertain"
+        },
+        "rationale": "Equal card counts do not imply equally varied exposure."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "div-recheck-02",
+      "version": 1,
+      "concept_id": "diversification",
+      "phase_role": "recheck",
+      "context": "transfer",
+      "scenario": "A friend says: “I spread my money across three different businesses, so I cannot lose money.”",
+      "question": "Which reply is most accurate?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Spreading exposure may reduce some risks, but losses are still possible."
+        },
+        {
+          "id": "b",
+          "text": "The friend is right: several businesses guarantee no loss."
+        },
+        {
+          "id": "c",
+          "text": "Diversification makes every risk disappear."
+        },
+        {
+          "id": "d",
+          "text": "Only one business can ever lose money."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "Some events can affect several businesses, and each business still has risks."
+        },
+        {
+          "id": "r2",
+          "text": "The number three guarantees a safe investment."
+        },
+        {
+          "id": "r3",
+          "text": "Spreading money changes uncertain returns into promised returns."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "diversification-guarantees-no-loss",
+          "r3": "diversification-guarantees-profit",
+          "r4": "uncertain"
+        },
+        "rationale": "Diversification is a risk-management idea, not a promise of profit or protection from every loss."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "liq-anchor-01",
+      "version": 1,
+      "concept_id": "liquidity",
+      "phase_role": "anchor",
+      "context": "game-related simplified decision",
+      "scenario": "Maya has $200 cash and stocks worth $700. Leo has $400 cash and stocks worth $500. Each must pay $300 today. Neither can sell stocks before the payment is due.",
+      "question": "Who can pay immediately from available cash?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Leo only."
+        },
+        {
+          "id": "b",
+          "text": "Both Maya and Leo."
+        },
+        {
+          "id": "c",
+          "text": "Maya only."
+        },
+        {
+          "id": "d",
+          "text": "Neither."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "Leo has at least $300 cash today; Maya has only $200 available today."
+        },
+        {
+          "id": "r2",
+          "text": "Both have $900 in total assets, so all of it is available to pay today."
+        },
+        {
+          "id": "r3",
+          "text": "Maya’s higher stock value means Maya must have more available cash."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "assets-are-immediately-available-cash",
+          "r3": "stock-value-equals-cash-availability",
+          "r4": "uncertain"
+        },
+        "rationale": "Equal total asset value does not imply equal liquidity at the payment deadline. The sale constraint is part of the fictional scenario, not a universal game or real-market rule."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "liq-anchor-02",
+      "version": 1,
+      "concept_id": "liquidity",
+      "phase_role": "anchor",
+      "context": "transfer",
+      "scenario": "A school club has $25 cash and equipment worth $200. A $40 bill is due today. The club cannot sell equipment until next month and has no other funds.",
+      "question": "Can the club pay the full bill today?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "No, it has only $25 available today."
+        },
+        {
+          "id": "b",
+          "text": "Yes, its total assets are $225."
+        },
+        {
+          "id": "c",
+          "text": "Yes, because $25 is greater than $40."
+        },
+        {
+          "id": "d",
+          "text": "Yes, because equipment is always the same as cash."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "The equipment cannot supply cash before the bill is due."
+        },
+        {
+          "id": "r2",
+          "text": "Owning assets worth more than a bill always means being able to pay immediately."
+        },
+        {
+          "id": "r3",
+          "text": "$25 is greater than $40."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "assets-are-immediately-available-cash",
+          "r3": "arithmetic-check",
+          "r4": "uncertain"
+        },
+        "rationale": "The club is $15 short in available cash. The numerical distractor should trigger a calculation check, not automatically a liquidity misconception."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "liq-recheck-01",
+      "version": 1,
+      "concept_id": "liquidity",
+      "phase_role": "recheck",
+      "context": "game-related simplified decision",
+      "scenario": "In a simplified scenario, Eli starts with $600 cash and buys an asset for $450. A $200 expense is then due before Eli can sell any assets. No other cash arrives.",
+      "question": "Can Eli cover the expense from remaining cash?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "No; $150 remains, which is less than $200."
+        },
+        {
+          "id": "b",
+          "text": "Yes; the asset is still worth $450."
+        },
+        {
+          "id": "c",
+          "text": "Yes; $600 minus $450 is $250."
+        },
+        {
+          "id": "d",
+          "text": "Yes; any asset can always be sold before a payment."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "The purchase leaves $150 available before the payment deadline."
+        },
+        {
+          "id": "r2",
+          "text": "The asset’s value can automatically be spent as cash."
+        },
+        {
+          "id": "r3",
+          "text": "$600 minus $450 equals $250."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "assets-are-immediately-available-cash",
+          "r3": "arithmetic-check",
+          "r4": "uncertain"
+        },
+        "rationale": "Remaining cash is $150. The problem specifies no sale before payment. Separate subtraction errors from reasoning about accessible assets."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    },
+    {
+      "id": "liq-recheck-02",
+      "version": 1,
+      "concept_id": "liquidity",
+      "phase_role": "recheck",
+      "context": "transfer",
+      "scenario": "Alex has $60 cash and collectibles worth $140. Quinn has $120 cash and collectibles worth $80. Each owes $100 today. Neither can sell collectibles until next week.",
+      "question": "Who can pay today from available cash?",
+      "answer_options": [
+        {
+          "id": "a",
+          "text": "Quinn only."
+        },
+        {
+          "id": "b",
+          "text": "Both, because each has $200 in assets."
+        },
+        {
+          "id": "c",
+          "text": "Alex only."
+        },
+        {
+          "id": "d",
+          "text": "Neither."
+        }
+      ],
+      "reason_prompt": "Which reason best explains your answer?",
+      "reason_options": [
+        {
+          "id": "r1",
+          "text": "Quinn has $120 available today; Alex has $60 available today."
+        },
+        {
+          "id": "r2",
+          "text": "All assets are immediately usable as cash."
+        },
+        {
+          "id": "r3",
+          "text": "More collectible value always means more available cash."
+        },
+        {
+          "id": "r4",
+          "text": "I am not sure."
+        }
+      ],
+      "teacher_only": {
+        "expected_answer_id": "a",
+        "expected_reason_id": "r1",
+        "reason_interpretations": {
+          "r2": "assets-are-immediately-available-cash",
+          "r3": "stock-value-equals-cash-availability",
+          "r4": "uncertain"
+        },
+        "rationale": "The difference is timing and form of assets, not total asset value."
+      },
+      "optional_confidence": [
+        "sure",
+        "somewhat_sure",
+        "unsure"
+      ],
+      "access_support": "Teacher may read the prompt aloud without explaining the concept. Record supports used consistently."
+    }
+  ],
+  "review_rubric": {
+    "pending": "No teacher review yet; no numerical value.",
+    "0": "Reasoning does not yet address the concept.",
+    "1": "Relevant but incomplete or inconsistent reasoning.",
+    "2": "Coherent reasoning applying the concept."
+  },
+  "suggestion_rules": {
+    "opportunity-cost": "Map concept-specific opportunity-cost reason tags to activity-next-best.",
+    "diversification": "Map concept-specific exposure/guarantee reason tags to activity-different-baskets.",
+    "liquidity": "Map assets/cash-availability reason tags to activity-cash-today.",
+    "arithmetic-check": "Suggest verifying the calculation or using pre-counted tokens; do not automatically infer a liquidity misconception.",
+    "uncertain": "Gather more evidence or invite an explanation; do not infer a specific misconception."
+  },
+  "change_log": [
+    {
+      "content_version": "pilot-1.1",
+      "date": "2026-11-24",
+      "changes": [
+        "oc-recheck-02 v1 -> v2: replaced the ambiguous pronoun 'It' with 'The class' in the scenario. Options, keys and mappings unchanged. Item IDs preserved; version bumped because student-facing wording changed."
+      ]
+    }
+  ]
+}

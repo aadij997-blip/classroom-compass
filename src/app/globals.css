@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* Outfit 400/600/700, self-hosted. License: public/fonts/Outfit-OFL.txt */
+@font-face { font-family: Outfit; src: url("/fonts/Outfit-400.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: Outfit; src: url("/fonts/Outfit-600.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: Outfit; src: url("/fonts/Outfit-700.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+@theme {
+  /* Verified playmoneymind.com anchors */
+  --color-cream: #fbfeeb;
+  --color-ink: #1a1f14;
+  --color-muted: #5a6350;
+  --color-lime: #93d12e;
+  --color-lime-press: #84bd29;
+  --color-red: #ab0507;
+  --color-pale: #e7f3c4;
+  /* Proposed product extensions (brand/tokens.css) */
+  --color-forest: #14532d;
+  --color-blush: #ffe3de;
+  --color-terracotta: #8f3b2e;
+  --color-amber-ink: #795400;
+  --color-amber: #fff3cf;
+  --color-neutral: #f1f2eb;
+  --color-line: rgb(26 31 20 / 0.14);
+  --color-peach: #e3a796;
+
+  --font-sans: Outfit, "Avenir Next", "Segoe UI", sans-serif;
+  --radius-panel: 22px;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    font-size: 17px;
+  }
+  h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.12; }
+  :focus-visible { outline: 3px solid var(--color-forest); outline-offset: 2px; border-radius: 6px; }
+  a { text-underline-offset: 3px; }
+  ::selection { background: var(--color-pale); }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px; padding: 0.6rem 1.1rem; border-radius: 12px; font-weight: 600; font-size: 16px;
+    transition: background-color 150ms, transform 120ms, box-shadow 150ms; cursor: pointer; text-decoration: none;
+    border: 1px solid transparent; white-space: nowrap;
+  }
+  .btn:active:not(:disabled) { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .btn-primary { background: var(--color-lime); color: var(--color-ink); box-shadow: 0 1px 0 rgb(26 31 20 / 0.18); }
+  .btn-primary:hover:not(:disabled) { background: var(--color-lime-press); }
+  .btn-secondary { background: white; color: var(--color-ink); border-color: var(--color-line); }
+  .btn-secondary:hover:not(:disabled) { background: var(--color-neutral); }
+  .btn-dark { background: var(--color-ink); color: white; }
+  .btn-dark:hover:not(:disabled) { background: #2e3526; }
+  .btn-danger { background: white; color: var(--color-red); border-color: rgb(171 5 7 / 0.35); }
+  .btn-danger:hover:not(:disabled) { background: #fff5f4; }
+  .btn-sm { min-height: 36px; padding: 0.35rem 0.8rem; font-size: 14px; border-radius: 10px; }
+  .link { color: var(--color-forest); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; }
+  .link:hover { text-decoration-thickness: 2px; }
+
+  .panel { background: white; border: 1px solid var(--color-line); border-radius: var(--radius-panel); padding: 1.5rem; }
+  .panel-quiet { background: var(--color-neutral); border-radius: 14px; padding: 0.85rem 1rem; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); font-weight: 600; }
+
+  /* Rounded instructional labels from the illustrated lesson */
+  .cue { display: inline-flex; align-items: center; gap: 0.35rem; border-radius: 999px; padding: 0.25rem 0.8rem; font-weight: 600; font-size: 14px; }
+  .cue-green { background: var(--color-pale); color: var(--color-forest); }
+  .cue-blush { background: var(--color-blush); color: var(--color-terracotta); }
+  .cue-white { background: white; color: var(--color-ink); }
+  .cue-amber { background: var(--color-amber); color: var(--color-amber-ink); }
+  .cue-neutral { background: var(--color-neutral); color: var(--color-muted); }
+
+  .field-label { display: block; font-weight: 600; margin-bottom: 0.35rem; }
+  .field-hint { display: block; color: var(--color-muted); font-size: 14px; margin-top: 0.25rem; }
+  .input {
+    width: 100%; min-height: 44px; border: 1px solid rgb(26 31 20 / 0.28); border-radius: 12px; background: white;
+    padding: 0.55rem 0.8rem; font: inherit; color: inherit;
+  }
+  .input:focus-visible { outline: 3px solid var(--color-forest); outline-offset: 1px; }
+
+  /* Choice tiles: radio cards with large targets */
+  .choice { position: relative; display: flex; gap: 0.75rem; align-items: flex-start; border: 2px solid var(--color-line); border-radius: 16px; padding: 0.8rem 1rem; background: white; cursor: pointer; transition: border-color 150ms, background-color 150ms; min-height: 52px; }
+  .choice:hover { border-color: rgb(26 31 20 / 0.35); }
+  .choice:has(input:checked) { border-color: var(--color-forest); background: #f6fbe8; }
+  .choice:has(input:focus-visible) { outline: 3px solid var(--color-forest); outline-offset: 2px; }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice-letter { flex: none; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 999px; background: var(--color-neutral); font-weight: 700; font-size: 15px; }
+  .choice:has(input:checked) .choice-letter { background: var(--color-forest); color: white; }
+
+  .table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; }
+  .table th { text-align: left; font-weight: 600; color: var(--color-muted); font-size: 13px; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--color-line); background: white; position: sticky; top: 0; }
+  .table td { padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--color-line); vertical-align: top; }
+  .table tr:last-child td { border-bottom: 0; }
+
+  .num-step { display: grid; place-items: center; width: 36px; height: 36px; flex: none; border-radius: 12px; background: var(--color-blush); color: var(--color-terracotta); font-weight: 700; }
+}
+
+/* Very faint workbook doodles — only for header strips, never behind data. */
+.doodle-strip {
+  background-color: var(--color-pale);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' viewBox='0 0 120 80'%3E%3Cg fill='none' stroke='%2314532d' stroke-opacity='.08' stroke-width='2'%3E%3Ccircle cx='18' cy='20' r='9'/%3E%3Cpath d='M18 15v10M15 17h5a2 2 0 010 4h-4a2 2 0 000 4h5'/%3E%3Crect x='62' y='44' width='26' height='17' rx='3'/%3E%3Cpath d='M70 44v-4h10v4'/%3E%3Cpath d='M98 14l6 8 8-12'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; font-size: 12pt; }
+  .panel { border-color: #bbb; break-inside: avoid; }
+  .print-break { break-before: page; }
+  .print-avoid { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  @page { margin: 14mm; }
+}
+.print-only { display: none; }
+@media print { .print-only { display: block; } }
