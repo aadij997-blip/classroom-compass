@@ -3,12 +3,17 @@ import Image from "next/image";
 import { requireTeacher } from "@/lib/server/context";
 import { NavLinks } from "@/components/nav";
 import { leaveDemo, resetDemo, signOutAction } from "@/app/actions";
+import { buildOrientationContext } from "@/lib/server/orientation";
+import { OrientationProvider } from "@/components/orientation/provider";
+import { StartTourButton } from "@/components/orientation/start-tour";
 
 export const dynamic = "force-dynamic";
 
 export default async function TeacherLayout({ children }: { children: React.ReactNode }) {
   const t = await requireTeacher();
+  const orientation = await buildOrientationContext(t);
   return (
+    <OrientationProvider ctx={orientation}>
     <div className="flex min-h-dvh flex-col">
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-white focus:px-3 focus:py-2">
         Skip to content
@@ -27,6 +32,9 @@ export default async function TeacherLayout({ children }: { children: React.Reac
                 {t.mode === "demo" ? "Sample" : t.displayName.slice(0, 18)}
               </summary>
               <div className="absolute right-0 z-20 mt-2 w-60 rounded-2xl border border-line bg-white p-2 shadow-lg">
+                <StartTourButton className="w-full rounded-xl px-3 py-2.5 text-left hover:bg-neutral">
+                  How it works <span className="block text-[13px] text-muted">A 2-minute sample walkthrough</span>
+                </StartTourButton>
                 {t.mode === "demo" ? (
                   <>
                     <form action={resetDemo}>
@@ -70,5 +78,6 @@ export default async function TeacherLayout({ children }: { children: React.Reac
         </div>
       </footer>
     </div>
+    </OrientationProvider>
   );
 }

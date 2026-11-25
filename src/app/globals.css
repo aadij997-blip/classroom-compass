@@ -122,3 +122,16 @@
 }
 .print-only { display: none; }
 @media print { .print-only { display: block; } }
+
+/* Orientation: light highlight on the walkthrough's current target. No overlay,
+   so the highlighted UI stays fully usable. */
+[data-tour-active] {
+  outline: 3px solid var(--color-lime);
+  outline-offset: 6px;
+  border-radius: 18px;
+  scroll-margin: 96px;
+  transition: outline-color 150ms;
+}
+@media print {
+  [data-tour-active] { outline: none; }
+}

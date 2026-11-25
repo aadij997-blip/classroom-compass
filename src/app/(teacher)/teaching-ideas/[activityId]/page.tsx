@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireTeacher } from "@/lib/server/context";
@@ -59,7 +61,7 @@ export default async function ActivityPage({
       </section>
 
       {view && (
-        <section className="panel no-print" aria-labelledby="plan">
+        <section className="panel no-print" aria-labelledby="plan" data-tour="activity-plan">
           {rec && !existing && (
             <div className="mb-5 rounded-2xl bg-blush/60 px-4 py-3 text-[15px]">
               <strong>Why this is suggested: </strong>
@@ -100,6 +102,7 @@ export default async function ActivityPage({
                   {existing.note && ` · ${existing.note}`}
                 </p>
                 <p className="mt-1 text-[13px] text-muted">“Mark taught” records that you taught it — it is not evidence of learning. Check again for that.</p>
+                <ContextHelp id="check_again_planned" title={ORIENTATION.contextual_help.check_again.title} className="mt-1">{ORIENTATION.contextual_help.check_again.body}</ContextHelp>
               </div>
               <ActionForm action={markTaughtAction}>
                 <input type="hidden" name="actionId" value={existing.id} />
@@ -108,9 +111,10 @@ export default async function ActivityPage({
             </div>
           )}
           {existing?.taughtAt && (
-            <div>
+            <div data-tour="activity-followup">
               <span className="cue cue-green">Taught {dateLabel(existing.taughtAt)}</span>
               <h2 id="plan" className="mt-2 text-[22px] font-bold">Check again</h2>
+              <ContextHelp id="check_again" auto title={ORIENTATION.contextual_help.check_again.title} className="mt-2">{ORIENTATION.contextual_help.check_again.body}</ContextHelp>
               {followUpRun ? (
                 <p className="mt-1">
                   A follow-up check is set up ({runLabel(followUpRun)}, {followUpRun.state}).{" "}
@@ -146,7 +150,7 @@ export default async function ActivityPage({
       )}
 
       <div className="grid gap-6 lg:grid-cols-[1.6fr_1fr]">
-        <section className="panel" aria-labelledby="steps">
+        <section className="panel" aria-labelledby="steps" data-tour="activity-script">
           <h2 id="steps" className="text-[22px] font-bold">Teacher script</h2>
           <ol className="mt-4 space-y-5">
             {activity.steps.map((s, i) => (

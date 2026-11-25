@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { requireTeacher } from "@/lib/server/context";
 import { buildInsight, comparableEarlierRun, dateLabel, loadSession, lookup, pickRun, plural, runLabel, PHASE_LABEL } from "@/lib/server/views";
@@ -84,7 +86,7 @@ export default async function TeachPage({ params, searchParams }: { params: Prom
         </section>
 
         {/* Level 2 — what we noticed */}
-        <section aria-labelledby="noticed" className="panel">
+        <section aria-labelledby="noticed" className="panel" data-tour="teach-class-picture" data-complete={insight?.summary.complete} data-eligible={insight?.summary.eligible}>
           <span className="cue cue-blush">What we noticed</span>
           <h2 id="noticed" className="mt-3 text-[24px] font-bold">A quick class picture</h2>
           {insight && run ? (
@@ -128,6 +130,15 @@ export default async function TeachPage({ params, searchParams }: { params: Prom
                   <span className="text-muted"> (counted per answer)</span>
                 </p>
               </details>
+              <ContextHelp id="evidence_labels" auto title={ORIENTATION.contextual_help.evidence_labels.title} className="mt-3">
+                <ul className="list-disc space-y-0.5 pl-5">
+                  <li><strong>Reasoning shown:</strong> {ORIENTATION.contextual_help.evidence_labels.reasoning_shown}</li>
+                  <li><strong>Worth another look:</strong> {ORIENTATION.contextual_help.evidence_labels.worth_another_look}</li>
+                  <li><strong>Mixed:</strong> {ORIENTATION.contextual_help.evidence_labels.mixed}</li>
+                  <li><strong>Unsure:</strong> {ORIENTATION.contextual_help.evidence_labels.unsure}</li>
+                  <li><strong>Missing:</strong> {ORIENTATION.contextual_help.evidence_labels.missing}</li>
+                </ul>
+              </ContextHelp>
             </>
           ) : (
             <div className="mt-3 space-y-3 text-[15px]">
@@ -199,6 +210,7 @@ export default async function TeachPage({ params, searchParams }: { params: Prom
       {comparison && comparison.comparison.comparable && (
         <section className="panel" aria-labelledby="compare">
           <h2 id="compare" className="text-[20px] font-bold">Before and exit — same questions, matched learners</h2>
+          <ContextHelp id="before_exit" title={ORIENTATION.contextual_help.before_exit.title} className="mt-1">{ORIENTATION.contextual_help.before_exit.body}</ContextHelp>
           <p className="mt-1 text-[14px] text-muted">
             {runLabel(comparison.before)} → {runLabel(run!)}. Identical item versions. Only learners who completed both are compared.
           </p>

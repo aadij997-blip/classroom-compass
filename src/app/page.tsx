@@ -4,11 +4,13 @@ import { getTeacher, supabaseConfigured } from "@/lib/server/context";
 import { startDemo } from "@/app/actions";
 import { SignInForm } from "./sign-in-form";
 import { CashTraysArt } from "@/components/art";
+import { StartTourButton } from "@/components/orientation/start-tour";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ signup?: string }> }) {
   if (await getTeacher()) redirect("/today");
+  const { signup } = await searchParams;
   return (
     <div className="min-h-dvh">
       <header className="border-b border-line">
@@ -18,7 +20,7 @@ export default async function Home() {
         </div>
       </header>
       <main className="mx-auto grid max-w-[1180px] gap-8 px-4 py-10 sm:px-8 lg:grid-cols-[1.4fr_1fr] lg:py-14">
-        <section className="relative overflow-hidden rounded-[28px] bg-pale p-7 sm:p-10">
+        <section className="rounded-[28px] bg-pale p-7 sm:p-10">
           <p className="cue cue-white">For InvestQuest teachers · Grades 4–6</p>
           <h1 className="mt-5 max-w-[15ch] text-[38px] font-bold sm:text-[50px]">
             See what your students are learning — and know what to teach next.
@@ -33,11 +35,19 @@ export default async function Home() {
               </li>
             ))}
           </ol>
-          <form action={startDemo} className="mt-8">
-            <button className="btn btn-primary text-[17px]">Explore a sample class →</button>
-            <p className="mt-2 text-[14px] text-forest">Fictional learners and responses. Nothing you do there touches a real class.</p>
-          </form>
-          <CashTraysArt className="pointer-events-none absolute -bottom-4 right-4 hidden w-[210px] opacity-95 xl:block" />
+          <div className="mt-8 flex items-end justify-between gap-4">
+            <div>
+              <div className="flex flex-wrap gap-3">
+                <form action={startDemo}>
+                  <button className="btn btn-primary text-[17px]">Explore a sample class →</button>
+                </form>
+                <StartTourButton className="btn btn-secondary text-[17px]" tourKey="anonymous">Take a quick walkthrough</StartTourButton>
+              </div>
+              <p className="mt-2 max-w-[46ch] text-[14px] text-forest">Fictional learners and responses. Nothing you do there touches a real class. The walkthrough is five short stops.</p>
+            </div>
+            {/* In normal flow so it can never cover the buttons or note. */}
+            <CashTraysArt className="pointer-events-none -mb-3 hidden w-[170px] flex-none opacity-95 xl:block" />
+          </div>
         </section>
         <section className="panel self-start">
           <h2 className="text-[22px] font-bold">Your classes</h2>
@@ -46,7 +56,7 @@ export default async function Home() {
               ? "Sign in or create a teacher account."
               : "Local trial mode: accounts and classes are stored only on this computer."}
           </p>
-          <SignInForm />
+          <SignInForm initialMode={signup === "1" ? "signup" : "signin"} />
           <div className="panel-quiet mt-6 text-[15px]">
             <strong>Learners:</strong> open the private link or QR code on the card your teacher gave you. No email or sign-in needed.
           </div>

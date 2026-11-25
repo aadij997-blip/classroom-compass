@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { requireTeacher } from "@/lib/server/context";
 import { loadSession, lookup, pickRun, runLabel, plural, PHASE_LABEL, dateLabel } from "@/lib/server/views";
@@ -25,7 +27,7 @@ export default async function CollectPage({ params, searchParams }: { params: Pr
   const categories = [...OBSERVATION_CATEGORIES[v.session.conceptId], ...OBSERVATION_CATEGORIES.any];
 
   const observationPanel = (
-    <section className="panel">
+    <section className="panel" data-tour="collect-observation">
       <h2 className="text-[20px] font-bold">{v.session.mode === "observation_only" ? "Record what you notice" : "Add an observation (optional)"}</h2>
       <p className="mt-1 text-[15px] text-muted">Quick notes during or after play. Choose who it is about so it keeps the right scope.</p>
       <div className="mt-4">
@@ -115,7 +117,7 @@ export default async function CollectPage({ params, searchParams }: { params: Pr
 
       {run.state === "draft" && playCue}
 
-      <section className="panel">
+      <section className="panel" data-tour="collect-status">
         {run.state === "draft" && (
           <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
             <div>
@@ -149,6 +151,11 @@ export default async function CollectPage({ params, searchParams }: { params: Pr
               <li className="flex items-center gap-2"><CircleDashed aria-hidden size={16} /> Not started: <strong>{sum.notStarted}</strong></li>
             </ul>
             {sum.notStarted + started > 0 && <p className="mt-2 text-[15px] text-muted">Some responses are still missing. Missing is not incorrect.</p>}
+            {run.state === "open" ? (
+              <ContextHelp id="collect_open" auto title={ORIENTATION.contextual_help.collect_open.title} className="mt-3">{ORIENTATION.contextual_help.collect_open.body}</ContextHelp>
+            ) : (
+              <ContextHelp id="collect_closed" auto title={ORIENTATION.contextual_help.collect_closed.title} className="mt-3">{ORIENTATION.contextual_help.collect_closed.body}</ContextHelp>
+            )}
             <details className="mt-4">
               <summary className="cursor-pointer font-semibold">Who has finished? ({plural(sum.eligible, "learner")})</summary>
               <ul className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6">
@@ -178,7 +185,7 @@ export default async function CollectPage({ params, searchParams }: { params: Pr
             </div>
           </div>
         )}
-        <div className="mt-5 flex flex-wrap gap-3 border-t border-line pt-5">
+        <div className="mt-5 flex flex-wrap gap-3 border-t border-line pt-5" data-tour="collect-tools">
           <Link href={`/sessions/${sessionId}/paper?run=${run.id}`} className="btn btn-sm btn-secondary"><Keyboard aria-hidden size={16} /> Enter paper responses</Link>
           <Link href={`/sessions/${sessionId}/print?run=${run.id}&copy=student`} className="btn btn-sm btn-secondary"><Printer aria-hidden size={16} /> Print student copies</Link>
           <Link href={`/sessions/${sessionId}/print?run=${run.id}&copy=teacher`} className="btn btn-sm btn-secondary"><Printer aria-hidden size={16} /> Print teacher guide</Link>

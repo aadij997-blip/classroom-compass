@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { requireTeacher } from "@/lib/server/context";
 import { dateLabel, loadClass, lookup, MODE_LABEL, PHASE_LABEL, plural } from "@/lib/server/views";
@@ -25,7 +27,8 @@ export default async function ClassPage({ params }: { params: Promise<{ classId:
         <Link href={`/sessions/new?classId=${b.class.id}`} className="btn btn-primary">Start a session <ArrowRight aria-hidden size={18} /></Link>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <ContextHelp id="class_tools" auto title={ORIENTATION.contextual_help.class_tools.title} className="mt-5">{ORIENTATION.contextual_help.class_tools.body}</ContextHelp>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-tour="class-tools">
         {[
           { href: `/classes/${b.class.id}/report`, label: "Class report", sub: "Printable summary", Icon: FileText },
           { href: `/classes/${b.class.id}/grid`, label: "Learner × concept", sub: "Latest check per concept", Icon: Grid3x3 },

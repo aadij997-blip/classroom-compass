@@ -3,8 +3,8 @@ import { useActionState, useState } from "react";
 import { signInAction } from "@/app/actions";
 import { FormStatus, SubmitButton } from "@/components/forms";
 
-export function SignInForm() {
-  const [mode, setMode] = useState<"signin" | "signup">("signin");
+export function SignInForm({ initialMode = "signin" }: { initialMode?: "signin" | "signup" }) {
+  const [mode, setMode] = useState<"signin" | "signup">(initialMode);
   const [state, action] = useActionState(signInAction, null);
   return (
     <form action={action} className="mt-5 space-y-4">

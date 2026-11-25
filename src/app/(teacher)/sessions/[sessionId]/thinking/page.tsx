@@ -86,7 +86,7 @@ export default async function ThinkingPage({ params, searchParams }: { params: P
                 <p className="mt-2 text-[16px]">{item.scenario}</p>
                 <p className="mt-1 font-semibold">{item.question}</p>
                 <h3 className="mt-4 text-[15px] font-semibold">Answer and reason pairs ({ib.answered} learners answered both)</h3>
-                <table className="table mt-2">
+                <table className="table mt-2" data-tour={idx === 0 ? "thinking-answer-reason-pairs" : undefined}>
                   <thead><tr><th scope="col">Answer</th><th scope="col">Reason</th><th scope="col" className="text-right">Learners</th></tr></thead>
                   <tbody>
                     {ib.pairs.map((p) => {

@@ -73,6 +73,10 @@ export function newDemoWorkspace(): string {
   return ws;
 }
 
+export function demoWorkspaceExists(ws: string) {
+  return DEMO_ID.test(ws) && demoExists(ws);
+}
+
 function demoExists(ws: string) {
   return !!demoStore().db.prepare("SELECT 1 FROM demo_workspaces WHERE id = ?").get(ws);
 }
@@ -143,6 +147,12 @@ export async function getTeacher(): Promise<TeacherContext | null> {
     if (!demoExists(ws)) seedDemo(ws); // server restarted: re-seed the same workspace
     return { teacherId: demoTeacherId(ws), displayName: "Sample teacher", mode: "demo", store: demoStore() };
   }
+  return getRealTeacher();
+}
+
+/** The signed-in teacher, ignoring any active sample class (used to return from the walkthrough). */
+export async function getRealTeacher(): Promise<TeacherContext | null> {
+  const jar = await cookies();
   if (supabaseConfigured) {
     const sb = await supabaseServer();
     const { data } = await sb.auth.getUser();

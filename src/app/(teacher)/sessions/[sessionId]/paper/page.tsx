@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireTeacher } from "@/lib/server/context";
@@ -46,6 +48,7 @@ export default async function PaperPage({ params, searchParams }: { params: Prom
       {run.state === "closed" && (
         <p role="status" className="cue cue-amber">This check is closed. Reopen it from Collect to enter or change paper responses.</p>
       )}
+      <ContextHelp id="paper_entry" auto title={ORIENTATION.contextual_help.paper_entry.title}>{ORIENTATION.contextual_help.paper_entry.body}</ContextHelp>
       <PaperGrid runId={run.id} items={items} rows={rows} disabled={run.state === "closed"} />
     </div>
   );

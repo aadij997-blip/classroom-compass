@@ -11,6 +11,7 @@ import {
   getTeacher,
   localSignIn,
   localSignUp,
+  demoWorkspaceExists,
   newDemoWorkspace,
   requireTeacher,
   secureCookies,
@@ -24,6 +25,7 @@ import { StoreError, type PaperEntry } from "@/lib/store/types";
 import { getActivity, getModule, itemRefsFor } from "@/lib/content";
 import { CONCEPT_IDS, MODES, PHASES, type IssuedToken } from "@/lib/domain/types";
 import type { ActionResult } from "@/components/forms";
+import { sanitizeDestination } from "@/lib/orientation";
 
 function failure(e: unknown): ActionResult {
   if (e instanceof StoreError) return { ok: false, message: e.message };
@@ -52,6 +54,27 @@ export async function resetDemo() {
 export async function leaveDemo() {
   (await cookies()).delete(DEMO_COOKIE);
   redirect("/");
+}
+
+/**
+ * Enters the sample class for the walkthrough. Reuses the current sample if one
+ * exists (never resets it); creates a fresh one only when none exists or the
+ * teacher explicitly asked for a fresh sample. Teacher sign-in is untouched.
+ */
+export async function startTourAction(fd: FormData) {
+  const jar = await cookies();
+  const ws = jar.get(DEMO_COOKIE)?.value;
+  const fresh = fd.get("fresh") === "1";
+  if (!ws || fresh || !demoWorkspaceExists(ws)) {
+    jar.set(DEMO_COOKIE, newDemoWorkspace(), { httpOnly: true, sameSite: "lax", secure: secureCookies, path: "/", maxAge: 60 * 60 * 24 });
+  }
+  redirect("/today");
+}
+
+/** Leaves the sample (only the sample cookie) and goes to an allowlisted page. */
+export async function leaveDemoTo(fd: FormData) {
+  (await cookies()).delete(DEMO_COOKIE);
+  redirect(sanitizeDestination(fd.get("dest")));
 }
 
 // ------------------------------------------------------------------- auth

@@ -1,0 +1,173 @@
+{
+  "version": "teacher-orientation-v1",
+  "welcome": {
+    "eyebrow": "A little guidance to get started",
+    "title": "Turn student thinking into your next teaching move.",
+    "body": "Keep playing InvestQuest at the table. Classroom Compass helps you collect two quick reflections, see what students are thinking, and choose a short activity to try next.",
+    "loop": [
+      "Play",
+      "Reflect",
+      "Notice",
+      "Teach",
+      "Check again"
+    ],
+    "primary": "Show me with a sample class",
+    "secondary": "Set up my class",
+    "dismiss": "I’ll explore on my own",
+    "time_note": "Five short stops. About two minutes.",
+    "sample_note": "The walkthrough uses fictional learners. Your own classes stay separate."
+  },
+  "tour": [
+    {
+      "id": "today",
+      "route_key": "today",
+      "target": "today-next-step",
+      "title": "Start with one useful next step",
+      "body": "Today brings forward something useful: resume collecting responses, open a teaching suggestion, or start a session. In this sample, a short activity is suggested from students’ reflection checks.",
+      "primary": "See the class picture",
+      "secondary": "Back",
+      "dismiss": "Exit tour",
+      "expected_action": "Navigate to the authorized sample session’s Teach view; do not create or modify records."
+    },
+    {
+      "id": "class-picture",
+      "route_key": "sample-teach",
+      "target": "teach-class-picture",
+      "title": "Read the picture, including what is missing",
+      "body": "{complete} of {eligible} learners completed this check. The labels describe the reasoning shown on these questions. Missing responses are separate; they are not incorrect answers. Confidence is shown separately too.",
+      "fallback_body": "This card shows what learners demonstrated on a check and how many responses are still missing. Missing responses are separate, not incorrect. Confidence is shown separately too.",
+      "optional_definition": "“Worth another look” suggests a conversation or more practice. It is not a permanent label for a learner.",
+      "primary": "See what is behind it",
+      "secondary": "Back",
+      "dismiss": "Exit tour"
+    },
+    {
+      "id": "thinking",
+      "route_key": "sample-thinking",
+      "target": "thinking-answer-reason-pairs",
+      "title": "Look at the answer and the reason",
+      "body": "An answer can be a guess. The selected reason helps you see how a learner reached it. Here you can inspect the response pattern behind a suggestion and add your own teaching context.",
+      "tip": "A possible difficulty is a starting point for follow-up. You decide what your students need.",
+      "primary": "Find a teaching move",
+      "secondary": "Back",
+      "dismiss": "Exit tour"
+    },
+    {
+      "id": "activity",
+      "route_key": "sample-activity",
+      "target": "activity-script",
+      "title": "A teaching move you can use right away",
+      "body": "You get the materials, a short teacher script, a scaffold, and an extension. In your own session, choose who to teach and use the plan. After actually teaching it, select “Mark taught”, then “Check again” to gather new evidence.",
+      "planned_variant": "This sample already has a saved plan. Read the script here. After you actually teach an activity, “Mark taught” unlocks the follow-up choices. The tour will not mark it taught for you.",
+      "taught_variant": "This activity is already recorded as taught. “Check again with fresh questions” adds a new scenario; “Repeat the same questions” reuses the questions. The tour will not launch either check for you.",
+      "primary": "See how to set up my session",
+      "secondary": "Back",
+      "dismiss": "Exit tour"
+    },
+    {
+      "id": "setup",
+      "route_key": "sample-session-preview",
+      "target": "session-collection-mode",
+      "title": "Make it work for your classroom",
+      "body": "Choose a class, one learning goal, and how to collect. Use Digital for private learner links, Paper for the same questions on a sheet, or Observation only for your own notes. You can preview the questions before starting.",
+      "tip": "This is a preview in the sample workspace. No class or session is created by continuing the tour.",
+      "primary": "I’m ready",
+      "secondary": "Back",
+      "dismiss": "Exit tour"
+    }
+  ],
+  "finish": {
+    "title": "You know the loop. Start small.",
+    "body": "Begin with one concept and one short check. Use the responses to choose what to teach next, then check again when it is useful.",
+    "primary_new_teacher": "Set up my class",
+    "primary_existing_teacher": "Return to my classes",
+    "primary_anonymous": "Create a teacher account",
+    "secondary": "Keep exploring the sample",
+    "later_help": "You can replay this walkthrough from “How it works”.",
+    "local_note": "You can explore on this computer. Digital collection from students’ devices needs classroom setup first.",
+    "local_help_label": "View classroom setup"
+  },
+  "first_class_checklist": {
+    "title": "Your first session, one step at a time",
+    "items": [
+      {
+        "id": "class",
+        "label": "Create a class",
+        "body": "Choose a class name, grade band, and learner count. Numbered aliases are created for you.",
+        "completion_rule": "An owned non-demo class with at least one learner exists."
+      },
+      {
+        "id": "session",
+        "label": "Choose a goal and set up a session",
+        "body": "Pick one concept. Choose Digital, Paper, or Observation only, then preview the material.",
+        "completion_rule": "A session exists for the selected owned class."
+      },
+      {
+        "id": "evidence",
+        "label": "Collect a little student thinking",
+        "body": "Open the check for devices or paper, or save an observation. You do not need to log every game turn.",
+        "completion_rule": "An eligible saved response or observation exists in the selected session."
+      }
+    ],
+    "dismiss": "Hide this checklist",
+    "help": "Need the walkthrough again?"
+  },
+  "contextual_help": {
+    "new_class": {
+      "title": "Aliases keep this simple",
+      "body": "Each learner gets a numbered alias. For Digital, give each learner their own private QR/link card. No student email account is needed. Keep any name-to-alias list outside the app."
+    },
+    "collection_mode": {
+      "title": "Choose the route that fits today",
+      "digital": "Learners use their own private card links. Paper responses can also be entered into a digital session.",
+      "paper": "Print the questions, then enter the letters learners circled in the paper grid.",
+      "observation_only": "Record what you notice for one learner, a table group, or the class. These notes keep that scope; a group note is not an individual result."
+    },
+    "check_phase": {
+      "title": "Before or after play?",
+      "body": "Choose an exit check for reflection after play. A before check uses the same questions so you can compare the learners who completed both. You can start with an exit check alone."
+    },
+    "collect_open": {
+      "title": "Let the thinking come in",
+      "body": "Give learners their private links or the printed sheet. Watch completed, started, and not-started counts. Close the check when you are ready to see their thinking; you do not need to treat missing responses as incorrect."
+    },
+    "collect_closed": {
+      "title": "This check is closed",
+      "body": "You can review these results now. To collect more answers or enter paper responses, choose “Reopen the check”. The orientation will not reopen it automatically."
+    },
+    "paper_entry": {
+      "title": "Enter what the learner circled",
+      "body": "Type A–D for each answer and reason. Use a dash if the learner left it blank; leave a cell empty if you have no sheet. Device answers remain identifiable. Follow the grid’s save feedback."
+    },
+    "evidence_labels": {
+      "title": "What the labels mean",
+      "reasoning_shown": "The expected answer and reason were shown on this check.",
+      "worth_another_look": "The response suggests a possible difficulty worth following up.",
+      "mixed": "The answer and reason give mixed or incomplete signals about understanding.",
+      "unsure": "The learner chose an unsure reason on this check. This is different from the optional confidence response.",
+      "missing": "There is no completed check to interpret yet."
+    },
+    "before_exit": {
+      "title": "Compare the same learners and questions",
+      "body": "This comparison includes learners who completed both checks on identical question versions. It describes those responses, not lasting ability or proof that the game caused the change."
+    },
+    "check_again": {
+      "title": "See what students show next",
+      "body": "Fresh questions test another scenario. Repeating the same questions allows a matched comparison when the item versions and learners line up. Recording an activity as taught does not show that students learned it."
+    },
+    "class_tools": {
+      "title": "Find the longer view",
+      "body": "From a class, use “Learner × concept” for recent evidence, a learner alias for their timeline, and “Class report” for a printable aggregate summary. “Learner cards” holds private links; “Groups & settings” holds roster tools."
+    },
+    "no_sample_evidence": {
+      "title": "This sample has changed",
+      "body": "The usual example is not available in this workspace. You can keep exploring, or choose to start a fresh sample walkthrough. Your current sample will not be reset without your choice."
+    }
+  },
+  "learner_intro": {
+    "title": "Let your teacher see your thinking",
+    "body": "For each question, choose an answer and the reason that fits your thinking. It is OK to choose “I am not sure”. How sure you feel and a written explanation are optional.",
+    "button": "Start",
+    "note": "Keep the existing short learner introduction. Do not show the teacher tour or teacher evidence in the learner flow."
+  }
+}

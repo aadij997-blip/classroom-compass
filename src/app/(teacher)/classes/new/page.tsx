@@ -1,4 +1,6 @@
 "use client";
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { useActionState } from "react";
 import { createClassAction } from "@/app/actions";
@@ -31,7 +33,8 @@ export default function NewClassPage() {
       <p className="eyebrow">New class</p>
       <h1 className="mt-2 text-[32px] font-bold">Create a class</h1>
       <p className="mt-2 text-muted">Learners get numbered aliases such as “Learner 01”. Keep any name list on paper, outside this app.</p>
-      <form action={action} className="panel mt-6 space-y-5">
+      <ContextHelp id="new_class" auto title={ORIENTATION.contextual_help.new_class.title} className="mt-4">{ORIENTATION.contextual_help.new_class.body}</ContextHelp>
+      <form action={action} className="panel mt-6 space-y-5" data-tour="new-class-form">
         <label className="block">
           <span className="field-label">Class name</span>
           <input className="input" name="title" required maxLength={80} placeholder="e.g. Room 12 — Period 3" />

@@ -1,3 +1,5 @@
+import { ContextHelp } from "@/components/orientation/context-help";
+import { ORIENTATION } from "@/lib/orientation";
 import Link from "next/link";
 import { requireTeacher } from "@/lib/server/context";
 import { allModules, CONTENT_VERSION, getItem, getModule } from "@/lib/content";
@@ -84,8 +86,15 @@ export default async function NewSessionPage({ searchParams }: { searchParams: P
           <ActionForm action={createSessionAction} className="panel space-y-5" statusPosition="end">
             <input type="hidden" name="classId" value={classId} />
             <input type="hidden" name="conceptId" value={conceptId} />
-            <fieldset>
+            <fieldset data-tour="session-collection-mode">
               <legend className="text-[19px] font-bold">3. How will you collect?</legend>
+              <ContextHelp id="collection_mode" auto title={ORIENTATION.contextual_help.collection_mode.title} className="mt-2">
+                <ul className="list-disc space-y-0.5 pl-5">
+                  <li><strong>Digital:</strong> {ORIENTATION.contextual_help.collection_mode.digital}</li>
+                  <li><strong>Paper:</strong> {ORIENTATION.contextual_help.collection_mode.paper}</li>
+                  <li><strong>Observation only:</strong> {ORIENTATION.contextual_help.collection_mode.observation_only}</li>
+                </ul>
+              </ContextHelp>
               <div className="mt-3 grid gap-3 sm:grid-cols-3">
                 {[
                   { v: "digital", t: "Digital", d: "Private card links on phones or Chromebooks. Paper entries also allowed." },
@@ -100,8 +109,9 @@ export default async function NewSessionPage({ searchParams }: { searchParams: P
                 ))}
               </div>
             </fieldset>
-            <fieldset>
+            <fieldset data-tour="session-check-phase">
               <legend className="text-[19px] font-bold">4. When is the check?</legend>
+              <ContextHelp id="check_phase" title={ORIENTATION.contextual_help.check_phase.title}>{ORIENTATION.contextual_help.check_phase.body}</ContextHelp>
               <p className="text-[14px] text-muted">Ignored for observation only.</p>
               <div className="mt-3 grid gap-3 sm:grid-cols-2">
                 <label className="choice !flex-col !gap-1">
@@ -120,7 +130,7 @@ export default async function NewSessionPage({ searchParams }: { searchParams: P
           </ActionForm>
         </div>
 
-        <aside className="space-y-4">
+        <aside className="space-y-4" data-tour="session-preview">
           <details className="panel" open>
             <summary className="cursor-pointer text-[18px] font-bold">Preview: what learners see</summary>
             <p className="mt-1 text-[14px] text-muted">Two answer-and-reason questions. Option order is shuffled per check, and is the same on paper and screen.</p>
